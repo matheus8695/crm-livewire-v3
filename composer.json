@@ -22,6 +22,7 @@
         "nunomaduro/larastan": "^2.9",
         "pestphp/pest": "^2.34",
         "phpunit/phpunit": "^10.1",
+        "pestphp/pest-plugin-laravel": "^2.0",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
