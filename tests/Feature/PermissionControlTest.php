@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\{Can, Permission, User};
+use App\Enum\Can;
+use App\Models\{Permission, User};
 use Database\Seeders\{PermissionSeeder, UserSeeder};
 use Illuminate\Support\Facades\{Cache, DB};
 
