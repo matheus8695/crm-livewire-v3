@@ -9,7 +9,7 @@
         <x-input label="Email" value="{{ $this->obfuscatedEmail }}" readonly/>
         <x-input label="Email Confirmation" wire:model="email_confirmation"/>
         <x-input label="Password" wire:model="password" type="password"/>
-        <x-input label="Password Confirmation" wire:model="password_confirmation"type="password"/>
+        <x-input label="Password Confirmation" wire:model="password_confirmation" type="password"/>
 
         <x-slot:actions>
             <div class="w-full flex items-center justify-between">
