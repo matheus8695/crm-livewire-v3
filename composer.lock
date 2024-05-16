@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f41be77c17691f950242b8c454bf865d",
+    "content-hash": "66beb854b0052d054392cca83e1fa3e5",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -3656,27 +3656,27 @@
         },
         {
             "name": "robsontenorio/mary",
-            "version": "0.46.1",
+            "version": "1.30.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robsontenorio/mary.git",
-                "reference": "6475df8ba611fcf228594e73d3cc32cf7bc8b189"
+                "reference": "89dc77a35c545708cb20244a8743a2570d0d450d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/6475df8ba611fcf228594e73d3cc32cf7bc8b189",
-                "reference": "6475df8ba611fcf228594e73d3cc32cf7bc8b189",
+                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/89dc77a35c545708cb20244a8743a2570d0d450d",
+                "reference": "89dc77a35c545708cb20244a8743a2570d0d450d",
                 "shasum": ""
             },
             "require": {
-                "blade-ui-kit/blade-heroicons": "^2.1",
-                "illuminate/support": "~10",
+                "blade-ui-kit/blade-heroicons": "^2.3",
+                "illuminate/support": "^10.0|^11.0",
                 "jfcherng/php-diff": "^6.15",
-                "laravel/prompts": "^0.1.11"
+                "laravel/prompts": "^0.1.15"
             },
             "require-dev": {
-                "orchestra/testbench": "^8.5",
-                "phpunit/phpunit": "^10.2"
+                "orchestra/testbench": "^8.21",
+                "phpunit/phpunit": "^10.5"
             },
             "type": "library",
             "extra": {
@@ -3705,19 +3705,33 @@
                     "homepage": "https://github.com/robsontenorio"
                 }
             ],
-            "description": "Laravel blade components for Livewire 3",
+            "description": "Laravel Blade UI Components for Livewire 3",
             "homepage": "https://mary-ui.com",
             "keywords": [
-                "Mary",
+                "DaisyUI",
+                "alpinejs",
                 "blade",
+                "blade ui components",
                 "components",
                 "laravel",
                 "livewire",
+                "livewire 3",
+                "livewire components",
+                "livewire packages",
+                "livewire ui",
+                "livewire ui components",
+                "livewire-components",
+                "livewire-packages",
+                "tailwind",
+                "tallstack",
+                "tallstack components",
+                "tallstack ui",
+                "tallstackui",
                 "ui"
             ],
             "support": {
                 "issues": "https://github.com/robsontenorio/mary/issues",
-                "source": "https://github.com/robsontenorio/mary/tree/0.46.1"
+                "source": "https://github.com/robsontenorio/mary/tree/1.30.6"
             },
             "funding": [
                 {
@@ -3725,7 +3739,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-27T16:24:04+00:00"
+            "time": "2024-05-11T17:51:14+00:00"
         },
         {
             "name": "symfony/console",
@@ -6808,16 +6822,16 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "1.6.11",
+            "version": "1.6.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "81a161d0b135df89951abd52296adf97deb0723d"
+                "reference": "1f4efdd7d3beafe9807b08156dfcb176d18f1699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/81a161d0b135df89951abd52296adf97deb0723d",
-                "reference": "81a161d0b135df89951abd52296adf97deb0723d",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/1f4efdd7d3beafe9807b08156dfcb176d18f1699",
+                "reference": "1f4efdd7d3beafe9807b08156dfcb176d18f1699",
                 "shasum": ""
             },
             "require": {
@@ -6887,7 +6901,7 @@
                 "security": "https://github.com/mockery/mockery/security/advisories",
                 "source": "https://github.com/mockery/mockery"
             },
-            "time": "2024-03-21T18:34:15+00:00"
+            "time": "2024-05-16T03:13:13+00:00"
         },
         {
             "name": "myclabs/deep-copy",

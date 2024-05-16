@@ -11,7 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4",
-        "robsontenorio/mary": "^0"
+        "robsontenorio/mary": "^1.26"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
