@@ -9,9 +9,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-/**
- * @property-read LengthAwarePaginator|User[] $users
- */
 class Index extends Component
 {
     public function mount(): void
