@@ -94,7 +94,7 @@ test('needs to show an obfuscate email to the user', function () {
 
     Notification::assertSentTo($user, ResetPassword::class, function (ResetPassword $notification) use ($user) {
         Livewire::test(Reset::class, ['token' => $notification->token, 'email' => $user->email])
-            ->set('$obfuscatedEmail', obfuscate_email($user->email))
+            ->assertSet('obfuscatedEmail', obfuscate_email($user->email))
             ->call('updatePassword');
 
         return true;
