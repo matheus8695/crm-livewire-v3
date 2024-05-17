@@ -11,7 +11,7 @@
 
         <div class="w-1/5">
             <x-choices
-                label="Searh by permissions"
+                label="Search by permissions"
                 wire:model.live="search_permissions"
                 :options="$permissionsToSearch"
                 option-label="key"
