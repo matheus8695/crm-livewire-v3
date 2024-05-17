@@ -14,6 +14,8 @@ class Index extends Component
 {
     public ?string $search = null;
 
+    public array $search_permissions = [];
+
     public function mount(): void
     {
         $this->authorize(Can::BE_AN_ADMIN->value);
@@ -27,16 +29,28 @@ class Index extends Component
     #[Computed]
     public function users(): Collection
     {
+        $this->validate(['search_permissions' => 'exists:permissions,id']);
+
         return User::query()
-            ->when($this->search, fn (Builder $q) => $q->where(
-                DB::raw('lower(name)'),
-                'like',
-                '%' . strtolower($this->search) . '%'
-            )->orWhere(
-                'email',
-                'like',
-                '%' . strtolower($this->search) . '%'
-            ))
+            ->when(
+                $this->search,
+                fn (Builder $q) => $q
+                ->where(
+                    DB::raw('lower(name)'),
+                    'like',
+                    '%' . strtolower($this->search) . '%'
+                )->orWhere(
+                    'email',
+                    'like',
+                    '%' . strtolower($this->search) . '%'
+                )
+            )
+            ->when(
+                $this->search_permissions,
+                fn (Builder $q) => $q->whereHas('permissions', function (Builder $query) {
+                    $query->whereIn('id', $this->search_permissions);
+                })
+            )
             ->get();
     }
 
