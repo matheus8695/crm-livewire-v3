@@ -10,11 +10,14 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $user = User::factory()
+
+        User::factory()
             ->withPermission(Can::BE_AN_ADMIN)
             ->create([
                 'name'  => 'Admin do CRM',
                 'email' => 'admin@crm.com',
             ]);
+
+        User::factory()->count(50)->create();
     }
 }
