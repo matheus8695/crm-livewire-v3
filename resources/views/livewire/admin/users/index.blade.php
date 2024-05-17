@@ -1,9 +1,23 @@
 <div>
     <x-header title="Users" separator/>
 
-    <div class="flex justify-between mb-4">
+    <div class="mb-4 flex space-x-4">
         <div class="w-1/3">
-            <x-input icon="o-magnifying-glass" class="input-md" placeholder="Searh by email and name" wire:model.live="search"/>
+            <x-input
+                label="Searh by email or name" 
+                icon="o-magnifying-glass" 
+                wire:model.live="search"/>
+        </div>
+
+        <div class="w-1/5">
+            <x-choices
+                label="Searh by permissions"
+                wire:model.live="search_permissions"
+                :options="$permissionsToSearch"
+                option-label="key"
+                search-function="filterPermissions"
+                searchable 
+            />
         </div>
     </div>
 
