@@ -9,10 +9,12 @@ use Illuminate\Database\Eloquent\{Builder, Collection};
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
-use Livewire\Component;
+use Livewire\{Component, WithPagination};
 
 class Index extends Component
 {
+    use WithPagination;
+
     public ?string $search = null;
 
     public array $search_permissions = [];
