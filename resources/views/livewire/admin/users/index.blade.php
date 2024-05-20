@@ -29,9 +29,16 @@
     </div>
 
     <x-table :headers="$this->headers" :rows="$this->users" striped @row-click="alert($event.detail.name)">
+        @scope('header_id', $header) 
+            <x-table.th :$header name="id"/>
+        @endscope
+
         @scope('header_name', $header) 
-            {{  $header['label'] }} 
-            {{-- <x-icon name="o-arrow-up" class="w-4 h-4"/> --}}
+            <x-table.th :$header name="name"/>
+        @endscope
+
+        @scope('header_email', $header) 
+            <x-table.th :$header name="email"/>
         @endscope
 
         @scope('cell_permissions', $user)
@@ -47,5 +54,5 @@
                 <x-button icon="o-arrow-path-rounded-square" wire:click="restore({{ $user->id }})" spinner class="btn-sm btn-success btn-ghost"></x-button>
             @endunless
         @endscope
-    </x-table>
+    </x-table.th>
 </div>
