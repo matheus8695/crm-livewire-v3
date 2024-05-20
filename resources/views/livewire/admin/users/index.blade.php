@@ -29,6 +29,11 @@
     </div>
 
     <x-table :headers="$this->headers" :rows="$this->users" striped @row-click="alert($event.detail.name)">
+        @scope('header_name', $header) 
+            {{  $header['label'] }} 
+            {{-- <x-icon name="o-arrow-up" class="w-4 h-4"/> --}}
+        @endscope
+
         @scope('cell_permissions', $user)
             @foreach ($user->permissions as $permission)
                 <x-badge :value="$permission->key" class="badge-primary"/>

@@ -20,6 +20,10 @@ class Index extends Component
 
     public bool $search_trash = false;
 
+    public string $sortDirection = 'asc';
+
+    public string $sortColumnBy = 'id';
+
     public function mount(): void
     {
         $this->authorize(Can::BE_AN_ADMIN->value);
@@ -60,6 +64,7 @@ class Index extends Component
                 $this->search_trash,
                 fn (Builder $q) => $q->onlyTrashed() /** @phpstan-ignore-line */
             )
+            ->orderBy($this->sortColumnBy, $this->sortDirection)
             ->get();
     }
 

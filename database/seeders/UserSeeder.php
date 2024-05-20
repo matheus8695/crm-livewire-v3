@@ -10,7 +10,6 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-
         User::factory()
             ->withPermission(Can::BE_AN_ADMIN)
             ->create([
