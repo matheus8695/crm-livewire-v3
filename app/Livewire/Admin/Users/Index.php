@@ -6,6 +6,7 @@ use App\Enum\Can;
 use App\Models\{Permission, User};
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\{Builder, Collection};
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -24,6 +25,8 @@ class Index extends Component
 
     public string $sortColumnBy = 'id';
 
+    public int $perPage = 15;
+
     public function mount(): void
     {
         $this->authorize(Can::BE_AN_ADMIN->value);
@@ -36,7 +39,7 @@ class Index extends Component
     }
 
     #[Computed]
-    public function users(): Collection
+    public function users(): LengthAwarePaginator
     {
         $this->validate(['search_permissions' => 'exists:permissions,id']);
 
@@ -65,7 +68,7 @@ class Index extends Component
                 fn (Builder $q) => $q->onlyTrashed() /** @phpstan-ignore-line */
             )
             ->orderBy($this->sortColumnBy, $this->sortDirection)
-            ->get();
+            ->paginate($this->perPage);
     }
 
     #[Computed]
