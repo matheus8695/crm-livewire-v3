@@ -1,3 +1,5 @@
 <div>
-    {{-- The Master doesn't talk, he acts. --}}
+    <button wire:click="$set('modal', true)">
+
+    </button>
 </div>
