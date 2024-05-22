@@ -54,21 +54,25 @@
         @endscope
 
         @scope('actions', $user)
-            @unless ($user->trashed())
-                <x-button 
-                    icon="o-trash"
-                    id="delete-btn-{{ $user->id }}"
-                    wire:key="delete-btn-{{ $user->id }}" 
-                    wire:click="destroy('{{ $user->id }}')" 
-                    spinner class="btn-sm" 
-                />
-            @else
-                <x-button 
-                    icon="o-arrow-path-rounded-square" 
-                    wire:click="restore({{ $user->id }})" 
-                    spinner class="btn-sm btn-success btn-ghost"
-                />
-            @endunless
+            @can(\App\Enum\Can::BE_AN_ADMIN->value)
+                @unless ($user->trashed())
+                    @unless ($user->is(auth()->user()))
+                        <x-button 
+                            icon="o-trash"
+                            id="delete-btn-{{ $user->id }}"
+                            wire:key="delete-btn-{{ $user->id }}" 
+                            wire:click="destroy('{{ $user->id }}')" 
+                            spinner class="btn-sm" 
+                        />
+                    @endunless
+                @else
+                    <x-button 
+                        icon="o-arrow-path-rounded-square" 
+                        wire:click="restore({{ $user->id }})" 
+                        spinner class="btn-sm btn-success btn-ghost"
+                    />
+                @endunless
+            @endcan
         @endscope
     </x-table.th>
 
