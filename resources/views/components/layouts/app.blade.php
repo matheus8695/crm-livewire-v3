@@ -22,8 +22,11 @@
         </x-slot:actions>
     </x-nav>
 
+    <x-toast/>
+    
     {{-- MAIN --}}
     <x-main full-width>
+
         {{-- SIDEBAR --}}
         <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
 
@@ -34,9 +37,11 @@
                 @if($user = auth()->user())
                     <x-menu-separator />
 
-                    <x-list-item :item="$user" value="name" sub-value="email" no-separator no-hover class="-mx-2 !-my-2 rounded">
+                    <x-list-item :item="$user" value="name" sub-value="username" no-separator no-hover class="-mx-2 !-my-2 rounded">
                         <x-slot:actions>
-                            <livewire:auth.logout/>
+                            <div class="o-tooltip-left" data-tip="logoff">
+                                <livewire:auth.logout/>
+                            </div>
                         </x-slot:actions>
                     </x-list-item>
 
