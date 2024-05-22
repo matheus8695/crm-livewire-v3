@@ -55,12 +55,25 @@
 
         @scope('actions', $user)
             @unless ($user->trashed())
-                <x-button icon="o-trash" wire:click="delete({{ $user->id }})" spinner class="btn-sm" ></x-button>
+                <x-button 
+                    icon="o-trash"
+                    id="delete-btn-{{ $user->id }}"
+                    wire:key="delete-btn-{{ $user->id }}" 
+                    wire:click="destroy('{{ $user->id }}')" 
+                    spinner class="btn-sm" 
+                />
             @else
-                <x-button icon="o-arrow-path-rounded-square" wire:click="restore({{ $user->id }})" spinner class="btn-sm btn-success btn-ghost"></x-button>
+                <x-button 
+                    icon="o-arrow-path-rounded-square" 
+                    wire:click="restore({{ $user->id }})" 
+                    spinner class="btn-sm btn-success btn-ghost"
+                />
             @endunless
         @endscope
     </x-table.th>
 
     {{ $this->users->links(data: ['scrollTo' => false]) }}
+
+    {{-- modal --}}
+    <livewire:admin.users.delete/>
 </div>
