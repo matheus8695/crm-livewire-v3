@@ -80,4 +80,5 @@
 
     {{-- modal --}}
     <livewire:admin.users.delete/>
+    <livewire:admin.users.restore/>
 </div>
