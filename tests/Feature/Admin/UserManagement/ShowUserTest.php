@@ -23,3 +23,14 @@ it('should be able to show all the details of the user in the component', functi
         ->assertSee($user->deleted_at->format('d/m/Y H:i'))
         ->assertSee($user->deletedBy->name);
 });
+
+it('should open the modal when the event is dispatched', function () {
+    $admin = User::factory()->admin()->create();
+    $user  = User::factory()->deleted()->create();
+
+    actingAs($admin);
+
+    Livewire::test(Admin\Users\Index::class)
+        ->call('showUser', $user->id)
+        ->assertDispatched('user::show', id: $user->id);
+});
