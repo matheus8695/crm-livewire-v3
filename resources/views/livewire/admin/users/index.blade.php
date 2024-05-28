@@ -54,25 +54,35 @@
         @endscope
 
         @scope('actions', $user)
-            @can(\App\Enum\Can::BE_AN_ADMIN->value)
-                @unless ($user->trashed())
-                    @unless ($user->is(auth()->user()))
+            <div class="flex items-center space-x-2">
+                <x-button 
+                    icon="o-eye"
+                    id="show-btn-{{ $user->id }}"
+                    wire:key="show-btn-{{ $user->id }}" 
+                    wire:click="showUser('{{ $user->id }}')" 
+                    spinner class="btn-sm" 
+                />
+
+                @can(\App\Enum\Can::BE_AN_ADMIN->value)
+                    @unless ($user->trashed())
+                        @unless ($user->is(auth()->user()))
+                            <x-button 
+                                icon="o-trash"
+                                id="delete-btn-{{ $user->id }}"
+                                wire:key="delete-btn-{{ $user->id }}" 
+                                wire:click="destroy('{{ $user->id }}')" 
+                                spinner class="btn-sm" 
+                            />
+                        @endunless
+                    @else
                         <x-button 
-                            icon="o-trash"
-                            id="delete-btn-{{ $user->id }}"
-                            wire:key="delete-btn-{{ $user->id }}" 
-                            wire:click="destroy('{{ $user->id }}')" 
-                            spinner class="btn-sm" 
+                            icon="o-arrow-path-rounded-square" 
+                            wire:click="restore({{ $user->id }})" 
+                            spinner class="btn-sm btn-success btn-ghost"
                         />
                     @endunless
-                @else
-                    <x-button 
-                        icon="o-arrow-path-rounded-square" 
-                        wire:click="restore({{ $user->id }})" 
-                        spinner class="btn-sm btn-success btn-ghost"
-                    />
-                @endunless
-            @endcan
+                @endcan
+            </div>
         @endscope
     </x-table.th>
 
