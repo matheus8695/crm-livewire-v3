@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Users;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Impersonate extends Component
@@ -13,8 +14,11 @@ class Impersonate extends Component
         HTML;
     }
 
+    #[On('user::impersonation')]
     public function impersonate(int $id): void
     {
         session()->put('impersonate', $id);
+
+        $this->redirect(route('dashboard'));
     }
 }
