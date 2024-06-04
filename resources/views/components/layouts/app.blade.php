@@ -24,6 +24,10 @@
 
     <x-toast/>
     
+    @if (session('impersonate'))
+        <livewire:admin.users.stop-impersonate/>
+    @endif
+
     {{-- MAIN --}}
     <x-main full-width>
 
@@ -61,10 +65,6 @@
 
         {{-- The `$slot` goes here --}}
         <x-slot:content>
-            @if (session('impersonate'))
-                {{  __("You're impersonating :name, click here to stop the impersonation", ["name" => auth()->user()->name]) }}
-            @endif
-
             {{ $slot }}
         </x-slot:content>
     </x-main>
