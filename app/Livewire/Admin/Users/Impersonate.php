@@ -17,6 +17,7 @@ class Impersonate extends Component
     #[On('user::impersonation')]
     public function impersonate(int $id): void
     {
+        session()->put('impersonator', auth()->id());
         session()->put('impersonate', $id);
 
         $this->redirect(route('dashboard'));
