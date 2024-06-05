@@ -24,6 +24,10 @@
 
     <x-toast/>
     
+    @if (session('impersonate'))
+        <livewire:admin.users.stop-impersonate/>
+    @endif
+
     {{-- MAIN --}}
     <x-main full-width>
 

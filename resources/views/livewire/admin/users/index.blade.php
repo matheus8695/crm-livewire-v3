@@ -56,7 +56,7 @@
         @scope('actions', $user)
             <div class="flex items-center space-x-2">
                 <x-button 
-                    icon="o-eye"
+                    icon="o-pencil"
                     id="show-btn-{{ $user->id }}"
                     wire:key="show-btn-{{ $user->id }}" 
                     wire:click="showUser('{{ $user->id }}')" 
@@ -73,6 +73,14 @@
                                 wire:click="destroy('{{ $user->id }}')" 
                                 spinner class="btn-sm" 
                             />
+
+                            <x-button 
+                            icon="o-eye"
+                            id="impersonate-btn-{{ $user->id }}"
+                            wire:key="impersonate-btn-{{ $user->id }}" 
+                            wire:click="impersonate('{{ $user->id }}')" 
+                            spinner class="btn-sm" 
+                        />
                         @endunless
                     @else
                         <x-button 
@@ -92,4 +100,5 @@
     <livewire:admin.users.delete/>
     <livewire:admin.users.restore/>
     <livewire:admin.users.show/>
+    <livewire:admin.users.impersonate/>
 </div>
