@@ -28,6 +28,8 @@
         <livewire:admin.users.stop-impersonate/>
     @endif
 
+    <livewire:dev.login/>
+
     {{-- MAIN --}}
     <x-main full-width>
 
