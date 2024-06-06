@@ -28,7 +28,9 @@
         <livewire:admin.users.stop-impersonate/>
     @endif
 
-    <livewire:dev.login/>
+    @if (!app()->environment('production'))
+        <livewire:dev.login/>
+    @endif
 
     {{-- MAIN --}}
     <x-main full-width>
