@@ -8,9 +8,8 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
 
-    {{-- NAVBAR mobile only --}}
+<body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
     <x-nav sticky class="lg:hidden">
         <x-slot:brand>
             <x-app-brand />
@@ -32,23 +31,20 @@
         <x-devbar/>
     @endif
 
-    {{-- MAIN --}}
     <x-main full-width>
-
-        {{-- SIDEBAR --}}
         <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
-
-            {{-- MENU --}}
             <x-menu activate-by-route>
-
-                {{-- User --}}
                 @if($user = auth()->user())
                     <x-menu-separator />
 
                     <x-list-item :item="$user" value="name" sub-value="username" no-separator no-hover class="-mx-2 !-my-2 rounded">
                         <x-slot:actions>
                             <div class="o-tooltip-left" data-tip="logoff">
-                                <livewire:auth.logout/>
+                                <x-button 
+                                    icon="o-power" 
+                                    class="btn-circle btn-ghost btn-xs" 
+                                    @click="$dispatch('logout')"
+                                />
                             </div>
                         </x-slot:actions>
                     </x-list-item>
@@ -67,13 +63,13 @@
             </x-menu>
         </x-slot:sidebar>
 
-        {{-- The `$slot` goes here --}}
         <x-slot:content>
             {{ $slot }}
         </x-slot:content>
     </x-main>
 
-    {{--  TOAST area --}}
     <x-toast />
+
+    <livewire:auth.logout/>
 </body>
 </html>

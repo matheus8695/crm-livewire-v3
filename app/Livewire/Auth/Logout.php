@@ -2,16 +2,19 @@
 
 namespace App\Livewire\Auth;
 
-use Illuminate\View\View;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Logout extends Component
 {
-    public function render(): View
+    public function render(): string
     {
-        return view('livewire.auth.logout');
+        return <<<BLADE
+            <div></div>
+        BLADE;
     }
 
+    #[On('logout')]
     public function logout(): void
     {
         auth()->logout();
