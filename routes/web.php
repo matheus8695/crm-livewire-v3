@@ -14,7 +14,7 @@ Route::get('/password/recovery', Password\Recovery::class)->name('password.recov
 Route::get('/password/reset', Password\Reset::class)->name('password.reset');
 #end auth
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', Welcome::class)->name('dashboard');
 
     #region Admin
