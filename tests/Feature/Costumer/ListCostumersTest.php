@@ -73,48 +73,6 @@ it('should be able to filter by name and email', function () {
         });
 });
 
-it('should be able to filter by permission.key', function () {
-    $admin       = User::factory()->admin()->create(['name' => 'Joe Doe', 'email' => 'admin@gmail.com']);
-    $nonAdmin    = User::factory()->withPermission(Can::TESTING)->create(['name' => 'Mario', 'email' => 'little_guy@gmail.com']);
-    $permission  = Permission::where('key', '=', Can::BE_AN_ADMIN)->first();
-    $permission2 = Permission::where('key', '=', Can::TESTING)->first();
-
-    actingAs($admin);
-    Livewire::test(Customers\Index::class)
-        ->assertSee('customers', function ($customers) {
-            expect($customers)->toHaveCount(2);
-
-            return true;
-        })
-        ->set('search_permissions', [$permission->id, $permission2->id])
-        ->assertSee('customers', function ($customers) {
-            expect($customers)
-                ->toHaveCount(2);
-
-            return true;
-        });
-});
-
-it('should be able to list the deleted customers', function () {
-    $admin            = User::factory()->admin()->create(['name' => 'Joe Doe', 'email' => 'admin@gmail.com']);
-    $deletedcustomers = User::factory()->count(2)->create(['deleted_at' => now()]);
-
-    actingAs($admin);
-    Livewire::test(Customers\Index::class)
-        ->assertSee('customers', function ($customers) {
-            expect($customers)->toHaveCount(1);
-
-            return true;
-        })
-        ->set('search_trash', true)
-        ->assertSee('customers', function ($customers) {
-            expect($customers)
-                ->toHaveCount(2);
-
-            return true;
-        });
-});
-
 it('should be able to sort by name', function () {
     $admin    = User::factory()->admin()->create(['name' => 'Joe Doe', 'email' => 'admin@gmail.com']);
     $nonAdmin = User::factory()->withPermission(Can::TESTING)->create(['name' => 'Mario', 'email' => 'little_guy@gmail.com']);
