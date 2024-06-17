@@ -23,4 +23,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/users', Admin\Users\Index::class)->name('admin.users');
     });
     #endregion
+
+    #region Customers
+    Route::get('/customers', fn () => 'oi')->name('customers');
+    #endregion
 });
