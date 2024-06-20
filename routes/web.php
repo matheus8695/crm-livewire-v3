@@ -2,7 +2,7 @@
 
 use App\Enum\Can;
 use App\Livewire\Auth\{EmailValidation, Login, Password, Register};
-use App\Livewire\{Admin, Welcome};
+use App\Livewire\{Admin, Customers, Welcome};
 use Illuminate\Support\Facades\{Auth, Route};
 
 #auth
@@ -22,5 +22,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/dashboard', Admin\Dashboard::class)->name('admin.dashboard');
         Route::get('/users', Admin\Users\Index::class)->name('admin.users');
     });
+    #endregion
+
+    #region Customers
+    Route::get('/customers', Customers\Index::class)->name('customers');
     #endregion
 });
