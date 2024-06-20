@@ -34,7 +34,7 @@
         />
     </div>
 
-    <x-table :headers="$this->headers" :rows="$this->users" striped @row-click="alert($event.detail.name)">
+    <x-table :headers="$this->headers" :rows="$this->items" striped @row-click="alert($event.detail.name)">
         @scope('header_id', $header) 
             <x-table.th :$header name="id"/>
         @endscope
@@ -94,7 +94,7 @@
         @endscope
     </x-table.th>
 
-    {{ $this->users->links(data: ['scrollTo' => false]) }}
+    {{ $this->items->links(data: ['scrollTo' => false]) }}
 
     {{-- modal --}}
     <livewire:admin.users.delete/>
