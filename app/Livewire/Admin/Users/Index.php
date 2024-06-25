@@ -52,7 +52,7 @@ class Index extends Component
             )
             ->when(
                 $this->search_trash,
-                fn (Builder $q) => $q->onlyTrashed() /** @phpstan-ignore-line */
+                fn (Builder $q) => $q->onlyTrashed()
             );
     }
 
