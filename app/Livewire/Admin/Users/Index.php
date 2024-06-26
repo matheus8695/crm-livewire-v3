@@ -43,7 +43,6 @@ class Index extends Component
     public function query(): Builder
     {
         return User::query()
-            ->search($this->search, ['name', 'email'])
             ->when(
                 $this->search_permissions,
                 fn (Builder $q) => $q->whereHas('permissions', function (Builder $query) {
