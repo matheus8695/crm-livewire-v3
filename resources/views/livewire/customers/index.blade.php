@@ -42,6 +42,7 @@
         @endscope
 
         @scope('actions', $customer) 
+            @unless ($customer->trashed())
             <x-button 
                 icon="o-trash"
                 id="archive-btn-{{ $customer->id }}"
@@ -49,6 +50,7 @@
                 @click="$dispatch('customer::archive', { id: {{ $customer->id }} })" 
                 spinner class="btn-sm" 
             />
+            @endunless
         @endscope
     </x-table>
 
