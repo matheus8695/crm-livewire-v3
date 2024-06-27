@@ -98,7 +98,7 @@ describe('validations', function () {
     });
 
     test('phone should be unique', function () {
-        Customer::factory()->create(['customer.phone' => '123456789']);
+        Customer::factory()->create(['phone' => '123456789']);
 
         Livewire::test(Customers\Update::class)
             ->set('customer', $this->customer)
