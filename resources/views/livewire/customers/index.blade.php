@@ -42,29 +42,38 @@
         @endscope
 
         @scope('actions', $customer) 
-            @unless ($customer->trashed())
+            <div class="flex justify-between items-center space-x-2">
                 <x-button 
-                    icon="o-trash"
-                    id="archive-btn-{{ $customer->id }}"
-                    wire:key="archive-btn-{{ $customer->id }}" 
-                    @click="$dispatch('customer::archive', { id: {{ $customer->id }} })" 
+                    icon="o-plus"
+                    @click="$dispatch('customer::update', { id: {{ $customer->id }} })" 
                     spinner class="btn-sm" 
                 />
-            @else 
-                <x-button 
-                    icon="o-arrow-uturn-left"
-                    id="restore-btn-{{ $customer->id }}"
-                    wire:key="restore-btn-{{ $customer->id }}" 
-                    @click="$dispatch('customer::restore', { id: {{ $customer->id }} })" 
-                    spinner class="btn-sm" 
-                />
-            @endunless
+
+                @unless ($customer->trashed())
+                    <x-button 
+                        icon="o-trash"
+                        id="archive-btn-{{ $customer->id }}"
+                        wire:key="archive-btn-{{ $customer->id }}" 
+                        @click="$dispatch('customer::archive', { id: {{ $customer->id }} })" 
+                        spinner class="btn-sm" 
+                    />
+                @else 
+                    <x-button 
+                        icon="o-arrow-uturn-left"
+                        id="restore-btn-{{ $customer->id }}"
+                        wire:key="restore-btn-{{ $customer->id }}" 
+                        @click="$dispatch('customer::restore', { id: {{ $customer->id }} })" 
+                        spinner class="btn-sm" 
+                    />
+                @endunless
+            </div>
         @endscope
     </x-table>
 
     {{ $this->items->links(data: ['scrollTo' => false]) }}
 
     <livewire:customers.create/>
+    <livewire:customers.update/>
     <livewire:customers.archive/>
     <livewire:customers.restore/>
 </div>
