@@ -13,14 +13,18 @@ beforeEach(function () {
 
 it('should be bale to create a costumer', function () {
     Livewire::test(Customers\Create::class)
-        ->set('name', 'Jhon Doe')
+        ->set('name', 'John Doe')
+        ->assertPropertyWired('name')
         ->set('email', 'joe@doe.com')
+        ->assertPropertyWired('email')
         ->set('phone', '123456789')
+        ->assertPropertyWired('phone')
         ->call('save')
+        ->assertMethodWiredToForm('save')
         ->assertHasNoErrors();
 
     assertDatabaseHas('customers', [
-        'name'  => 'Jhon Doe',
+        'name'  => 'John Doe',
         'email' => 'joe@doe.com',
         'phone' => '123456789',
         'type'  => 'customer',
@@ -92,4 +96,9 @@ describe('validations', function () {
             ->call('save')
             ->assertHasErrors(['phone' => 'unique']);
     });
+});
+
+test('checking if component is in the page', function () {
+    Livewire::test(Customers\Index::class)
+        ->assertContainsLivewireComponent('customers.create');
 });

@@ -21,6 +21,7 @@ it('should be able to login with any user', function () {
     Livewire::test(Login::class)
         ->set('selectedUser', $user->id)
         ->call('login')
+        ->assertMethodWired('login')
         ->assertRedirect(route('dashboard'));
 
     assertAuthenticatedAs($user);
