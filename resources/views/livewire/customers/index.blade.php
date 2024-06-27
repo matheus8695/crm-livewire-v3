@@ -43,13 +43,21 @@
 
         @scope('actions', $customer) 
             @unless ($customer->trashed())
-            <x-button 
-                icon="o-trash"
-                id="archive-btn-{{ $customer->id }}"
-                wire:key="archive-btn-{{ $customer->id }}" 
-                @click="$dispatch('customer::archive', { id: {{ $customer->id }} })" 
-                spinner class="btn-sm" 
-            />
+                <x-button 
+                    icon="o-trash"
+                    id="archive-btn-{{ $customer->id }}"
+                    wire:key="archive-btn-{{ $customer->id }}" 
+                    @click="$dispatch('customer::archive', { id: {{ $customer->id }} })" 
+                    spinner class="btn-sm" 
+                />
+            @else 
+                <x-button 
+                    icon="o-arrow-uturn-left"
+                    id="restore-btn-{{ $customer->id }}"
+                    wire:key="restore-btn-{{ $customer->id }}" 
+                    @click="$dispatch('customer::restore', { id: {{ $customer->id }} })" 
+                    spinner class="btn-sm" 
+                />
             @endunless
         @endscope
     </x-table>
@@ -58,4 +66,5 @@
 
     <livewire:customers.create/>
     <livewire:customers.archive/>
+    <livewire:customers.restore/>
 </div>
