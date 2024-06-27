@@ -24,7 +24,8 @@ test('when confirming we should load the customer and set modal to true', functi
     Livewire::test(Customers\Restore::class)
         ->call('confirmAction', $customer->id)
         ->assertSet('customer.id', $customer->id)
-        ->assertSet('modal', true);
+        ->assertSet('modal', true)
+        ->assertPropertyEntangled('modal');
 });
 
 test('after restoring we should dispatch an event to tell the list to reload', function () {
@@ -43,4 +44,14 @@ test('after restoring we should close the modal', function () {
         ->set('customer', $customer)
         ->call('restore')
         ->assertSet('modal', false);
+});
+
+test('making sure restore method is wired', function () {
+    Livewire::test(Customers\Restore::class)
+        ->assertMethodWired('restore');
+});
+
+test('checking if component is in the page', function () {
+    Livewire::test(Customers\Index::class)
+        ->assertContainsLivewireComponent('customers.restore');
 });

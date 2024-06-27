@@ -92,3 +92,10 @@ it('should not be possible to impersonate myself', function () {
         ->call('impersonate', $admin->id);
 
 })->throws(Exception::class);
+
+test('checking if component is in the page', function () {
+    actingAs(User::factory()->admin()->create());
+
+    Livewire::test(Admin\Users\Index::class)
+        ->assertContainsLivewireComponent('admin.users.impersonate');
+});
