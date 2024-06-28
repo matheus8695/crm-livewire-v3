@@ -20,7 +20,7 @@ class Create extends Component
     #[On('customer::create')]
     public function open(): void
     {
-        $this->resetErrorBag();
+        $this->form->resetErrorBag();
         $this->modal = true;
     }
 
