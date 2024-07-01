@@ -43,13 +43,15 @@
 
         @scope('actions', $customer) 
             <div class="flex justify-between items-center space-x-2">
-                <x-button 
-                    icon="o-plus"
-                    @click="$dispatch('customer::update', { id: {{ $customer->id }} })" 
-                    spinner class="btn-sm" 
-                />
-
                 @unless ($customer->trashed())
+                    <x-button 
+                        icon="o-pencil"
+                        id="update-btn-{{ $customer->id }}"
+                        wire:key="update-btn-{{ $customer->id }}" 
+                        @click="$dispatch('customer::update', { id: {{ $customer->id }} })" 
+                        spinner class="btn-sm" 
+                    />
+
                     <x-button 
                         icon="o-trash"
                         id="archive-btn-{{ $customer->id }}"
