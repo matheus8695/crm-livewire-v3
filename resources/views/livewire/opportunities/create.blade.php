@@ -4,8 +4,16 @@
 
         <div class="space-y-2">
             <x-input label="Title" wire:model='form.title'/>
-            <x-input label="Status" wire:model='form.status'/>
-            <x-input label="Amount" type='number' wire:model='form.amount'/>
+            <x-select 
+                label="Status" 
+                :options="[
+                    ['id' => 'open', 'name' => 'open'],
+                    ['id' => 'won', 'name' => 'won'],
+                    ['id' => 'lost', 'name' => 'lost'],
+                ]"
+                wire:model='form.status'
+            />
+            <x-input label="Amount" wire:model='form.amount' prefix="R$" locale="pt-BR" money/>
         </div>
 
         <x-slot:actions>

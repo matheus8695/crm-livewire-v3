@@ -42,12 +42,24 @@ describe('validations', function () {
         'max'      => ['max', str_repeat('a', 256)],
     ]);
 
-    test('status should be required', function () {
+    test('Status', function ($rule, $value) {
         Livewire::test(Opportunities\Create::class)
-            ->set('form.status', '')
+            ->set('form.status', $value)
             ->call('save')
-            ->assertHasErrors(['form.status' => 'required']);
-    });
+            ->assertHasErrors(['form.status' => $rule]);
+    })->with([
+        'required' => ['required', ''],
+        'in'       => ['in', 'jeremias'],
+    ]);
+
+    test('Amount', function ($rule, $value) {
+        Livewire::test(Opportunities\Create::class)
+            ->set('form.amount', $value)
+            ->call('save')
+            ->assertHasErrors(['form.amount' => $rule]);
+    })->with([
+        'required' => ['required', ''],
+    ]);
 });
 
 test('checking if component is in the page', function () {
