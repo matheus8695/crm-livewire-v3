@@ -1,0 +1,16 @@
+<x-drawer wire:model='modal' title="Create Opportunities" class="w-1/3 p-4" right>
+    <x-form wire:submit='save' id="create-opportunity-form">
+    <hr class="my-5">
+
+        <div class="space-y-2">
+            <x-input label="Title" wire:model='form.title'/>
+            <x-input label="Status" wire:model='form.status'/>
+            <x-input label="Amount" type='number' wire:model='form.amount'/>
+        </div>
+
+        <x-slot:actions>
+            <x-button label="Cancel" @click="$wire.modal = false"/>
+            <x-button label="Save" type="submit" form="create-opportunity-form"/>
+        </x-slot:actions>
+    </x-form>
+</x-drawer>

@@ -54,6 +54,7 @@
 
                 <x-menu-item title="Home" icon="o-home" link="/" />
                 <x-menu-item title="Customers" icon="o-building-storefront" :link="route('customers')" />
+                <x-menu-item title="Opportunities" icon="o-building-storefront" :link="route('opportunities')" />
 
                 @can(\App\Enum\Can::BE_AN_ADMIN->value)
                     <x-menu-sub title="Admin" icon="o-lock-closed">
