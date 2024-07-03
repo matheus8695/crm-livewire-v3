@@ -79,7 +79,7 @@
     {{ $this->items->links(data: ['scrollTo' => false]) }}
 
     <livewire:opportunities.create/>
-    {{-- <livewire:opportunities.update/>
     <livewire:opportunities.archive/>
+    {{-- <livewire:opportunities.update/>
     <livewire:opportunities.restore/> --}}
 </div>

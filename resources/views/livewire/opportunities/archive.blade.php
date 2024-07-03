@@ -1,3 +1,11 @@
-<div>
-    {{-- Because she competes with no one, no one can compete with her. --}}
-</div>
+<x-modal 
+    wire:model='modal' 
+    title="Archive Confirmation"
+    subtitle="You are archive the opportunity {{ $opportunity?->name }}" 
+>
+    <x-slot:actions>
+        <x-button label="Hum... no" @click="$wire.modal = false"/>
+        <x-button label="Yes, i am" class="btn-primary" wire:click='archive'/>
+    </x-slot:actions>
+</x-modal>
+
