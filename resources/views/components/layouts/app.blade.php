@@ -7,6 +7,7 @@
     <title>{{ isset($title) ? $title.' - '.config('app.name') : config('app.name') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/robsontenorio/mary@0.44.2/libs/currency/currency.js"></script>
 </head>
 
 <body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
@@ -54,6 +55,7 @@
 
                 <x-menu-item title="Home" icon="o-home" link="/" />
                 <x-menu-item title="Customers" icon="o-building-storefront" :link="route('customers')" />
+                <x-menu-item title="Opportunities" icon="o-currency-dollar" :link="route('opportunities')" />
 
                 @can(\App\Enum\Can::BE_AN_ADMIN->value)
                     <x-menu-sub title="Admin" icon="o-lock-closed">
