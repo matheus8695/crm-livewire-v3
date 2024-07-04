@@ -19,23 +19,23 @@ class Form extends BaseForm
     #[Validate(['required'])]
     public ?string $amount = null;
 
-    public function setOpportunity(Opportunity $opportunity)
+    public function setOpportunity(Opportunity $opportunity): void
     {
         $this->opportunity = $opportunity;
 
         $this->title  = $opportunity->title;
         $this->status = $opportunity->status;
-        $this->amount = (string)$opportunity->amount;
+        $this->amount = (string) ($opportunity->amount / 100);
     }
 
-    public function create()
+    public function create(): void
     {
         $this->validate();
 
         Opportunity::create([
             'title'  => $this->title,
             'status' => $this->status,
-            'amount' => $this->amount,
+            'amount' => $this->getAmountAsInt(),
         ]);
 
         $this->reset();
@@ -47,8 +47,19 @@ class Form extends BaseForm
 
         $this->opportunity->title  = $this->title;
         $this->opportunity->status = $this->status;
-        $this->opportunity->amount = $this->amount;
+        $this->opportunity->amount = $this->getAmountAsInt();
 
         $this->opportunity->update();
+    }
+
+    public function getAmountAsInt(): int
+    {
+        $amount = $this->amount;
+
+        if ($amount === null) {
+            $amount = 0;
+        }
+
+        return (int) ($amount * 100);
     }
 }

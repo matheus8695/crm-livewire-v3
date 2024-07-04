@@ -40,9 +40,22 @@
         @scope('header_status', $header) 
             <x-table.th :$header name="status"/>
         @endscope
-
+        
         @scope('header_amount', $header) 
-            <x-table.th :$header name="amount"/>
+        <x-table.th :$header name="amount"/>
+        @endscope
+        
+        @scope('cell_status', $item)
+        <x-badge :value="$item->status" @class([
+            'badge-outline badge-sm',
+            'badge-info' => $item->status == 'open',
+            'badge-success' => $item->status == 'won',
+            'badge-error' => $item->status == 'lost'
+        ])/>
+        @endscope
+
+        @scope('cell_amount', $item)
+        {{ number_format($item->amount/100, 2, ',', '.') }}
         @endscope
 
         @scope('actions', $opportunity) 
