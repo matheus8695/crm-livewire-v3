@@ -80,6 +80,6 @@
 
     <livewire:opportunities.create/>
     <livewire:opportunities.archive/>
-    {{-- <livewire:opportunities.update/>
-    <livewire:opportunities.restore/> --}}
+    <livewire:opportunities.restore/>
+    {{-- <livewire:opportunities.update/> --}}
 </div>
