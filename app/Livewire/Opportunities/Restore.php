@@ -3,6 +3,7 @@
 namespace App\Livewire\Opportunities;
 
 use App\Models\Opportunity;
+use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -12,7 +13,7 @@ class Restore extends Component
 
     public bool $modal = false;
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.opportunities.restore');
     }

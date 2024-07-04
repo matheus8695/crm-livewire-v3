@@ -81,5 +81,5 @@
     <livewire:opportunities.create/>
     <livewire:opportunities.archive/>
     <livewire:opportunities.restore/>
-    {{-- <livewire:opportunities.update/> --}}
+    <livewire:opportunities.update/>
 </div>
