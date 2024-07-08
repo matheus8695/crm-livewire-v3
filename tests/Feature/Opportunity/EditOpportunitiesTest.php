@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Opportunities;
-use App\Models\{Opportunity, User};
+use App\Models\{Customer, Opportunity, User};
 use Livewire\Livewire;
 
 use function Pest\Laravel\{actingAs, assertDatabaseHas};
@@ -12,8 +12,12 @@ beforeEach(function () {
 });
 
 it('should be able to update a opportunity', function () {
+    $customer = Customer::factory()->create();
+
     Livewire::test(Opportunities\Update::class)
         ->call('load', $this->opportunity->id)
+        ->set('form.customer_id', $customer->id)
+        ->assertPropertyWired('form.customer_id')
         ->set('form.title', 'John Doe')
         ->assertPropertyWired('form.title')
         ->set('form.status', 'open')
@@ -33,6 +37,16 @@ it('should be able to update a opportunity', function () {
 });
 
 describe('validations', function () {
+    test('customer', function ($rule, $value) {
+        Livewire::test(Opportunities\Create::class)
+            ->set('form.customer_id', $value)
+            ->call('save')
+            ->assertHasErrors(['form.customer_id' => $rule]);
+    })->with([
+        'required' => ['required', ''],
+        'exists'   => ['exists', 88],
+    ]);
+
     test('title', function ($rule, $value) {
         Livewire::test(Opportunities\Update::class)
             ->call('load', $this->opportunity->id)

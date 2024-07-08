@@ -9,6 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('opportunities', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('customer_id')->constrained();
             $table->string('title');
             $table->string('status')->default('open');
             $table->integer('amount')->nullable();

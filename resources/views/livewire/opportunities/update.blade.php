@@ -3,6 +3,7 @@
         <hr class="my-5">
 
         <div class="space-y-2">
+            <x-input label="Customer" wire:model='form.customer_id'/>
             <x-input label="Title" wire:model='form.title'/>
             <x-select 
                 label="Status" 

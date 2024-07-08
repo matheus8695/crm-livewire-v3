@@ -1,8 +1,8 @@
 <x-drawer wire:model='modal' title="Create Opportunities" class="w-1/3 p-4" right>
     <x-form wire:submit='save' id="create-opportunity-form">
-    <hr class="my-5">
-
+        <hr class="my-5">
         <div class="space-y-2">
+            <x-input label="Customer" wire:model='form.customer_id'/>
             <x-input label="Title" wire:model='form.title'/>
             <x-select 
                 label="Status" 
