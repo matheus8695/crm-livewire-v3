@@ -2,9 +2,8 @@
 
 namespace App\Livewire\Opportunities;
 
-use App\Models\{Customer, Opportunity};
+use App\Models\{Opportunity};
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -13,8 +12,6 @@ class Update extends Component
     public Form $form;
 
     public bool $modal = false;
-
-    public Collection|array $customers = [];
 
     public function render(): View
     {
@@ -42,11 +39,6 @@ class Update extends Component
 
     public function search(string $value = ''): void
     {
-        $this->customers = Customer::query()
-            ->where('name', 'like', "%$value%")
-            ->take(5)
-            ->orderBy('name')
-            ->get(['id', 'name'])
-            ->merge(Customer::query()->whereId($this->form->customer_id)->get(['id', 'name']));
+        $this->form->searchCustomers($value);
     }
 }
