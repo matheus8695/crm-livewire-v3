@@ -26,4 +26,9 @@ class Board extends Component
             end")
             ->get();
     }
+
+    public function updateOpportunities($data)
+    {
+
+    }
 }
