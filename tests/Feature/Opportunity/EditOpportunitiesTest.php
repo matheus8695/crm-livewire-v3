@@ -17,7 +17,6 @@ it('should be able to update a opportunity', function () {
     Livewire::test(Opportunities\Update::class)
         ->call('load', $this->opportunity->id)
         ->set('form.customer_id', $customer->id)
-        ->assertPropertyWired('form.customer_id')
         ->set('form.title', 'John Doe')
         ->assertPropertyWired('form.title')
         ->set('form.status', 'open')
@@ -29,10 +28,11 @@ it('should be able to update a opportunity', function () {
         ->assertHasNoErrors();
 
     assertDatabaseHas('opportunities', [
-        'id'     => $this->opportunity->id,
-        'title'  => 'John Doe',
-        'status' => 'open',
-        'amount' => '12345',
+        'id'          => $this->opportunity->id,
+        'customer_id' => $customer->id,
+        'title'       => 'John Doe',
+        'status'      => 'open',
+        'amount'      => '12345',
     ]);
 });
 

@@ -26,9 +26,10 @@ class Form extends BaseForm
     {
         $this->opportunity = $opportunity;
 
-        $this->title  = $opportunity->title;
-        $this->status = $opportunity->status;
-        $this->amount = (string) ($opportunity->amount / 100);
+        $this->customer_id = $opportunity->customer_id;
+        $this->title       = $opportunity->title;
+        $this->status      = $opportunity->status;
+        $this->amount      = (string) ($opportunity->amount / 100);
     }
 
     public function create(): void

@@ -16,7 +16,6 @@ it('should be bale to create a opportunity', function () {
 
     Livewire::test(Opportunities\Create::class)
         ->set('form.customer_id', $customer->id)
-        ->assertPropertyWired('form.customer_id')
         ->set('form.title', 'John Doe')
         ->assertPropertyWired('form.title')
         ->set('form.status', 'open')

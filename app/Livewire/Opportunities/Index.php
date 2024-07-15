@@ -25,10 +25,9 @@ class Index extends Component
     public function query(): Builder
     {
         return Opportunity::query()
-            ->when(
-                $this->search_trash,
-                fn (Builder $q) => $q->onlyTrashed()
-            );
+            ->select(['opportunities.*', 'customers.name as customer_name'])
+            ->join('customers', 'customers.id', '=', 'opportunities.customer_id')
+            ->when($this->search_trash, fn (Builder $q) => $q->onlyTrashed());
     }
 
     public function searchColumns(): array
@@ -41,6 +40,7 @@ class Index extends Component
         return [
             Header::make('id', '#'),
             Header::make('title', 'Title'),
+            Header::make('customer_name', 'Customer'),
             Header::make('status', 'Status'),
             Header::make('amount', 'Amount'),
         ];
