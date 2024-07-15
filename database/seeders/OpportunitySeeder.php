@@ -9,6 +9,13 @@ class OpportunitySeeder extends Seeder
 {
     public function run(): void
     {
-        Opportunity::factory()->count(10)->create();
+        $opps = [];
+
+        for ($i = 1; $i < 50; $i++) {
+            $opps[] = Opportunity::factory()
+                ->make(['customer_id' => rand(1, 50)])->toArray();
+        }
+
+        Opportunity::query()->insert($opps);
     }
 }

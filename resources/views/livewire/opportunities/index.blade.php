@@ -55,7 +55,7 @@
         @endscope
 
         @scope('cell_amount', $item)
-        {{ number_format($item->amount/100, 2, ',', '.') }}
+            <div class="whitespace-nowrap">R$ {{ number_format($item->amount/100, 2, ',', '.') }}</div>
         @endscope
 
         @scope('actions', $opportunity) 

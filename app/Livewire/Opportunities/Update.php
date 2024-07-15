@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Opportunities;
 
-use App\Models\Opportunity;
+use App\Models\{Opportunity};
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -19,19 +19,13 @@ class Update extends Component
     }
 
     #[On('opportunity::update')]
-    public function open(): void
-    {
-        $this->resetErrorBag();
-        $this->modal = true;
-    }
-
-    #[On('opportunity::update')]
     public function load(int $id): void
     {
         $opportunity = Opportunity::find($id);
         $this->form->setOpportunity($opportunity);
 
         $this->form->resetErrorBag();
+        $this->search();
         $this->modal = true;
     }
 
@@ -41,5 +35,10 @@ class Update extends Component
         $this->modal = false;
 
         $this->dispatch('opportunity::reload')->to('opportunities.index');
+    }
+
+    public function search(string $value = ''): void
+    {
+        $this->form->searchCustomers($value);
     }
 }

@@ -20,6 +20,7 @@ class Create extends Component
     public function open(): void
     {
         $this->form->resetErrorBag();
+        $this->search();
         $this->modal = true;
     }
 
@@ -29,5 +30,10 @@ class Create extends Component
         $this->modal = false;
 
         $this->dispatch('opportunity::reload')->to('opportunities.index');
+    }
+
+    public function search(string $value = ''): void
+    {
+        $this->form->searchCustomers($value);
     }
 }
