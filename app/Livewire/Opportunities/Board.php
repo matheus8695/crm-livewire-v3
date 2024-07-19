@@ -20,11 +20,7 @@ class Board extends Component
     public function opportunities(): Collection
     {
         return Opportunity::query()
-            ->orderByRaw("case 
-                when status = 'open' then 1 
-                when status = 'won' then 2 
-                when status = 'lost' then 3 
-            end")
+            ->orderByRaw("field(status, 'open', 'won', 'lost')")
             ->orderBy('sort_order')
             ->get();
     }
