@@ -5,6 +5,7 @@ namespace App\Livewire\Opportunities;
 use App\Models\Opportunity;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -25,7 +26,35 @@ class Board extends Component
             ->get();
     }
 
-    public function updateOpportunities($data): void
+    #[Computed]
+    public function opens(): Collection
+    {
+        return $this->opportunities()
+            ->where('status', '=', 'open');
+    }
+
+    #[Computed]
+    public function wons(): Collection
+    {
+        return $this->opportunities()
+            ->where('status', '=', 'won');
+    }
+
+    #[Computed]
+    public function losts(): Collection
+    {
+        return $this->opportunities()
+            ->where('status', '=', 'lost');
+    }
+
+    public function updateOpportunities(array $data): void
+    {
+        $order = $this->getItemsInOrder($data);
+        $this->updateStatuses($order);
+        $this->updateSortOrders($order);
+    }
+
+    private function getItemsInOrder(array $data): SupportCollection
     {
         $order = collect();
 
@@ -37,14 +66,36 @@ class Board extends Component
             );
         }
 
-        $open      = explode(',', $order[0]);
-        $won       = explode(',', $order[1]);
-        $lost      = explode(',', $order[2]);
-        $sortOrder = $order->join(',');
+        return $order;
+    }
 
-        DB::table('opportunities')->whereIn('id', $open)->update(['status' => 'open']);
-        DB::table('opportunities')->whereIn('id', $won)->update(['status' => 'won']);
-        DB::table('opportunities')->whereIn('id', $lost)->update(['status' => 'lost']);
+    private function updateStatuses(SupportCollection $collection): void
+    {
+        foreach (['open', 'won', 'lost'] as $status) {
+            $this->updateStatus($status, $collection);
+        }
+    }
+
+    private function updateStatus(string $status, SupportCollection $collection): void
+    {
+        $id = match ($status) {
+            'open'  => 0,
+            'won'   => 1,
+            'lost'  => 2,
+            default => null
+        };
+
+        $list = $collection[$id];
+        $ids  = explode(',', $list);
+
+        if (filled($list)) {
+            DB::table('opportunities')->whereIn('id', $ids)->update(['status' => $status]);
+        }
+    }
+
+    private function updateSortOrders(SupportCollection $collection): void
+    {
+        $sortOrder = $collection->filter(fn ($f) => filled($f))->join(',');
         DB::table('opportunities')->update(['sort_order' => DB::raw("field(id, $sortOrder)")]);
     }
 }

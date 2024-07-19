@@ -45,3 +45,106 @@ it('should list all opportunities ordered by sort_order', function () {
             return true;
         });
 });
+
+it('should be able to update status and order of each opportunity', function () {
+    $opp1 = Opportunity::factory()->create(['status' => 'open', 'sort_order' => 3]);
+    $opp2 = Opportunity::factory()->create(['status' => 'won', 'sort_order' => 5]);
+    $opp3 = Opportunity::factory()->create(['status' => 'lost', 'sort_order' => 1]);
+    $opp4 = Opportunity::factory()->create(['status' => 'open', 'sort_order' => 2]);
+    $opp5 = Opportunity::factory()->create(['status' => 'lost', 'sort_order' => 4]);
+
+    $data = [
+        0 => [
+            'order' => 1,
+            'value' => 'open',
+            'items' => [
+                0 => [
+                    'open'  => 1,
+                    'value' => $opp2->id,
+                ],
+            ],
+        ],
+        1 => [
+            'order' => 2,
+            'value' => 'won',
+            'items' => [
+                0 => [
+                    'open'  => 1,
+                    'value' => $opp3->id,
+                ],
+                1 => [
+                    'open'  => 2,
+                    'value' => $opp4->id,
+                ],
+            ],
+        ],
+        2 => [
+            'order' => 3,
+            'value' => 'lost',
+            'items' => [
+                0 => [
+                    'open'  => 1,
+                    'value' => $opp1->id,
+                ],
+                1 => [
+                    'open'  => 2,
+                    'value' => $opp5->id,
+                ],
+            ],
+        ],
+    ];
+
+    Livewire::test(Board::class)
+        ->call('updateOpportunities', $data)
+        ->assertOk();
+
+    $opp1->refresh();
+    $opp2->refresh();
+    $opp3->refresh();
+    $opp4->refresh();
+    $opp5->refresh();
+
+    expect($opp1)->status->toBe('lost')->sort_order->toBe(4)
+        ->and($opp2)->status->toBe('open')->sort_order->toBe(1)
+        ->and($opp3)->status->toBe('won')->sort_order->toBe(2)
+        ->and($opp4)->status->toBe('won')->sort_order->toBe(3)
+        ->and($opp5)->status->toBe('lost')->sort_order->toBe(5);
+});
+
+it('should be able to update the board even if one of the statuses is empty', function ($status) {
+    $opportunity = Opportunity::factory()->create(['status' => $status]);
+
+    $data = [
+        0 => [
+            'order' => 1,
+            'value' => 'open',
+            'items' => [],
+        ],
+        1 => [
+            'order' => 2,
+            'value' => 'won',
+            'items' => [],
+        ],
+        2 => [
+            'order' => 3,
+            'value' => 'lost',
+            'items' => [],
+        ],
+    ];
+
+    $groupId = match($status) {
+        'open' => 0,
+        'won'  => 1,
+        'lost' => 2,
+    };
+
+    $data[$groupId]['items'] = [['order' => 1, 'value' => (string)$opportunity->id]];
+
+    Livewire::test(Board::class)
+        ->call('updateOpportunities', $data)
+        ->assertOk();
+})->with([
+    'status: open' => ['open'],
+    'status: won'  => ['won'],
+    'status: lost' => ['lost'],
+]);
