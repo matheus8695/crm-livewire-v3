@@ -1,7 +1,7 @@
 <div>
     <x-header title="Customer {{ $customer->name }}" separator/>
     
-    <div class="grid grid-cols-3 h-svh">
+    <div class="grid grid-cols-3 h-svh gap-3">
         <div class="bg-base-200 rounded-sm p-4 space-y-2 gap-4 flex flex-col">
             <div class="space-y-1">
                 <x-info.title>Personal Info</x-info.title>
@@ -42,7 +42,15 @@
             </div>
         </div>
 
-        <div class="bg-green-300 col-span-2"></div>
+        <div class="bg-base-200 rounded-md text-base col-span-2">
+            <div class="py-2 bg-base-300 rounded-t-md w-full">
+                <x-ui.tab :href="route('customers.show', [$customer, 'opportunities'])">Opportunities</x-ui.tab>
+                <x-ui.tab :href="route('customers.show', [$customer, 'tasks'])">Tasks</x-ui.tab>
+                <x-ui.tab :href="route('customers.show', [$customer, 'notes'])">Notes</x-ui.tab>
+            </div>
+
+            @livewire("customers.$tab.index")
+        </div>
     </div>
 </div>
 
