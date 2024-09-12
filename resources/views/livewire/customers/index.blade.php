@@ -44,6 +44,15 @@
         @scope('actions', $customer) 
             <div class="flex justify-between items-center space-x-2">
                 @unless ($customer->trashed())
+                    <a
+                        id="show-btn-{{ $customer->id }}"
+                        wire:key="show-btn-{{ $customer->id }}" 
+                        href="{{ route('customers.show', $customer) }}"
+                        class="btn btn-sm"
+                    >
+                      <x-icon name="o-eye" />  
+                    </a>
+
                     <x-button 
                         icon="o-pencil"
                         id="update-btn-{{ $customer->id }}"
