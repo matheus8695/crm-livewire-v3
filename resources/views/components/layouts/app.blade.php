@@ -37,7 +37,7 @@
             <x-menu activate-by-route>
                 @if($user = auth()->user())
                     <x-menu-separator />
-
+ 
                     <x-list-item :item="$user" value="name" sub-value="username" no-separator no-hover class="-mx-2 !-my-2 rounded">
                         <x-slot:actions>
                             <div class="o-tooltip-left" data-tip="logoff">

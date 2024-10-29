@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CustomerSeeder::class,
             OpportunitySeeder::class,
+            TaskSeeder::class,
         ]);
     }
 }

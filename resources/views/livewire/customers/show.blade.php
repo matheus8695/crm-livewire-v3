@@ -49,7 +49,9 @@
                 <x-ui.tab :href="route('customers.show', [$customer, 'notes'])">Notes</x-ui.tab>
             </div>
 
-            @livewire("customers.$tab.index")
+            <div class="">
+                @livewire("customers.$tab.index", [ "customer" => $customer])
+            </div>
         </div>
     </div>
 </div>

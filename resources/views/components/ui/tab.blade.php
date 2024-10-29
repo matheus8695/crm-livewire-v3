@@ -12,4 +12,5 @@
 ]) }} 
     href="{{ $href }}" wire:navigate.hover
 >
-{{ $slot }}
+    {{ $slot }}
+</a>
