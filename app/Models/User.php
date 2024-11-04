@@ -41,6 +41,8 @@ class User extends Authenticatable implements Auditable
         'password'          => 'hashed',
     ];
 
+    protected $with = ['permissions'];
+
     public function restoredBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'restored_by');
