@@ -9,7 +9,7 @@
                     <x-icon name="o-queue-list" class="w-4 h-4 -mt-px opacity-30"/>
                 </button>
 
-                <input id="task-{{ $task->id }}" type="checkbox" value="1" @if ($task->done_at) checked @endif />
+                <input id="task-{{ $task->id }}" type="checkbox" wire:click="toggleCheck({{ $task->id }}, 'done')" value="1" @if ($task->done_at) checked @endif />
                 <label for="task-{{ $task->id }}">{{ $task->title }}</label>
                 <select>
                     <option>assigned to: {{ $task->assignedTo?->name }}</option>    
@@ -24,7 +24,7 @@
     <ul class="flex flex-col gap-1">
         @foreach ($this->doneTasks as $task)
         <li>
-            <input id="task-{{ $task->id }}" type="checkbox" value="1" @if ($task->done_at) checked @endif />
+            <input id="task-{{ $task->id }}" type="checkbox" wire:click="toggleCheck({{ $task->id }}, 'pendding')" value="1" @if ($task->done_at) checked @endif />
             <label for="task-{{ $task->id }}">{{ $task->title }}</label>
             <select>
                 <option>assigned to: {{ $task->assignedTo?->name }}</option>    
