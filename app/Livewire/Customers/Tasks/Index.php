@@ -13,7 +13,7 @@ class Index extends Component
 {
     public Customer $customer;
 
-    #[On('task::created')]
+    #[On(['task::created', 'task::updated', 'task::deleted'])]
     public function render(): View
     {
         return view('livewire.customers.tasks.index');
