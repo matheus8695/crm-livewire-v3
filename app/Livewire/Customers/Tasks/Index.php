@@ -3,7 +3,8 @@
 namespace App\Livewire\Customers\Tasks;
 
 use App\Actions\DataSort;
-use App\Models\Customer;
+use App\Models\{Customer, Task};
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Livewire\Attributes\{Computed, On};
 use Livewire\Component;
@@ -30,8 +31,18 @@ class Index extends Component
         return $this->customer->tasks()->done()->get();
     }
 
-    public function updateTaskOrder($items)
+    public function updateTaskOrder($items): void
     {
         (new DataSort('tasks', $items, 'value'))->run();
+    }
+
+    public function toggleCheck(int $id, string $status): void
+    {
+        Task::whereId($id)
+            ->when(
+                $status == 'done',
+                fn (Builder $q) => $q->update(['done_at' => now()]),
+                fn (Builder $q) => $q->update(['done_at' => null])
+            );
     }
 }
