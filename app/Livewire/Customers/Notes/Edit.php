@@ -40,6 +40,20 @@ class Edit extends Component
         $this->dispatch('notes::refresh')->to('customers.notes.index');
     }
 
+    public function pinNote(): void
+    {
+        if ($this->note->customer->notes()->wherePinned(true)->where('id', '!=', $this->note->id)->exists()) {
+            $this->error('You can only have one pinned note');
+
+            return;
+        }
+
+        $this->note->pinned = !$this->note->pinned;
+        $this->note->save();
+
+        $this->info($this->note->pinned ? 'Note pinned' : 'Note unpinned');
+    }
+
     public function render(): View
     {
         return view('livewire.customers.notes.edit');

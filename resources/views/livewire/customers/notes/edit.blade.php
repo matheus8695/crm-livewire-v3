@@ -6,10 +6,14 @@
         <div class="absolute top-2 right-2 flex gap-4">
             <x-button
                 class="btn-ghost btn-sm"
-                icon="o-star"
                 spinner
                 wire:click="pinNote"
-            />
+            >
+                <x-icon 
+                    name="s-star"
+                    @class(['w-4 h-4', 'text-yellow-500' => $note->pinned])
+                />
+            </x-button>
     
             @if ($note->user->is(auth()->user()))
                 <x-button
@@ -38,7 +42,7 @@
                     </x-button>
                 </div>
 
-                <x-button 
+                <x-button
                     type='button' 
                     class="btn-xs btn-ghost !text-error"
                     wire:click='destroy'
