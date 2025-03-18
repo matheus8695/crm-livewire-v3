@@ -3,25 +3,44 @@
         <p>{{ $note->note }}</p>
         <p class="text-sm italic mt-2">by {{ $note->user->name }}</p>
 
-        @if ($note->user->is(auth()->user()))
+        <div class="absolute top-2 right-2 flex gap-4">
             <x-button
-                class="btn-ghost btn-sm absolute top-2 right-2"
-                icon="o-pencil"
+                class="btn-ghost btn-sm"
+                icon="o-star"
                 spinner
-                wire:click="$set('edit', true)"
+                wire:click="pinNote"
             />
-        @endif
+    
+            @if ($note->user->is(auth()->user()))
+                <x-button
+                    class="btn-ghost btn-sm"
+                    icon="o-pencil"
+                    spinner
+                    wire:click="$set('edit', true)"
+                />
+            @endif
+        </div>
     @else
-        <form class="pt-1 pb-3 flex items-start gap-2" wire:submit='save'>
+        <form class="flex-col items-start gap-2" wire:submit='save'>
             <div class="w-full">
                 <x-textarea wire:model='note.note' class="input-sm" placeholder="{{ __('Write down your new note') }}" />
             </div>
         
-            <div>
-                <x-button type='submit' class="btn-sm btn-ghost">{{ __('Save') }}</x-button>
+            <div class="flex justify-between">
+                <div>
+                    <x-button type='submit' class="btn-xs btn-ghost">{{ __('Save') }}</x-button>
+                    <x-button 
+                        type='button' 
+                        class="btn-xs btn-ghost"
+                        wire:click="$set('edit', false)"
+                    >
+                        {{ __('Cancel') }}
+                    </x-button>
+                </div>
+
                 <x-button 
                     type='button' 
-                    class="btn-sm btn-ghost btn-error"
+                    class="btn-xs btn-ghost !text-error"
                     wire:click='destroy'
                 >
                     {{ __('Are you sure?') }}
