@@ -19,22 +19,31 @@
     
     <hr class="border-dashed border-gray-700 my-2"/>
 
-    <div class="uppercase font-bold text-slate-600 text-xs mb-2">Done [{{ $this->doneTasks->count() }}]</div>
-    <ul class="flex flex-col gap-1">
-        @foreach ($this->doneTasks as $task)
-        <li class="flex items-start gap-2 justify-between">
-            <div class="flex gap-2">
-                <input id="task-{{ $task->id }}" type="checkbox" wire:click="toggleCheck({{ $task->id }}, 'pendding')" value="1" @if ($task->done_at) checked @endif />
-                <label for="task-{{ $task->id }}">{{ $task->title }}</label>
-                <select>
-                    <option>assigned to: {{ $task->assignedTo?->name }}</option>    
-                </select>   
-            </div>
-
-            <button title="{{ __('Delete task') }}" class="cursor-pointer" wire:click='deleteTask({{ $task->id }})'>
-                <x-icon name="o-trash" class="w-4 h-4 -mt-px opacity-30 hover:opacity-100 hover:text-error"/>
+    <div x-data="{show: true}">
+        <div class="uppercase font-bold text-slate-600 text-xs mb-2 flex items-center gap-2">
+            <span>Done [{{ $this->doneTasks->count() }}]</span>
+            <button title="{{ __('HIde/Show list') }}" class="cursor-pointer" @click="show = !show" type="button">
+                <x-icon x-show="show" name="o-chevron-up" class="w-4 h-4 -mt-px opacity-50 hover:opacity-100 hover:text-error" />
+                <x-icon x-show="!show" name="o-chevron-down" class="w-4 h-4 -mt-px opacity-50 hover:opacity-100 hover:text-error" />
             </button>
-        </li>    
-        @endforeach
-    </ul>
+        </div>
+
+        <ul class="flex flex-col gap-1" x-show="show" x-transition.opacity.duration.300ms>
+            @foreach ($this->doneTasks as $task)
+            <li class="flex items-start gap-2 justify-between">
+                <div class="flex gap-2">
+                    <input id="task-{{ $task->id }}" type="checkbox" wire:click="toggleCheck({{ $task->id }}, 'pendding')" value="1" @if ($task->done_at) checked @endif />
+                    <label for="task-{{ $task->id }}">{{ $task->title }}</label>
+                    <select>
+                        <option>assigned to: {{ $task->assignedTo?->name }}</option>    
+                    </select>   
+                </div>
+
+                <button title="{{ __('Delete task') }}" class="cursor-pointer" wire:click='deleteTask({{ $task->id }})'>
+                    <x-icon name="o-trash" class="w-4 h-4 -mt-px opacity-30 hover:opacity-100 hover:text-error"/>
+                </button>
+            </li>    
+            @endforeach
+        </ul>
+    </div>
 </div>
