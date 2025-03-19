@@ -51,6 +51,7 @@ class Edit extends Component
         $this->note->pinned = !$this->note->pinned;
         $this->note->save();
 
+        $this->dispatch('pinned-note::refresh')->to('customers.pinned-note');
         $this->info($this->note->pinned ? 'Note pinned' : 'Note unpinned');
     }
 

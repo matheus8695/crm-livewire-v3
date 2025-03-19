@@ -1,4 +1,4 @@
-<div class="p-4 my-4 rounded-lg shadow-md dark:bg-gray-700 relative">
+<div class="bg-base-300 rounded-md p-4 space-y-2 text-base gap-4 flex flex-col relative">
     @unless ($edit)
         <p>{{ $note->note }}</p>
         <p class="text-sm italic mt-2">by {{ $note->user->name }}</p>
