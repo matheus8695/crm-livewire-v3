@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Enum\Can;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -37,7 +38,10 @@ class UserFactory extends Factory
 
     public function withPermission(Can $key): static
     {
-        return $this->afterCreating(fn (User $user) => $user->givePermissionTo($key));
+        return $this->afterCreating(function (Model $user) use ($key) {
+            /** @var User $user */
+            $user->givePermissionTo($key);
+        });
     }
 
     public function withValidationCode(): static
@@ -50,7 +54,10 @@ class UserFactory extends Factory
 
     public function admin(): static
     {
-        return $this->afterCreating(fn (User $user) => $user->givePermissionTo(Can::BE_AN_ADMIN));
+        return $this->afterCreating(function (Model $user) {
+            /** @var User $user */
+            $user->givePermissionTo(Can::BE_AN_ADMIN);
+        });
     }
 
     public function deleted(): static

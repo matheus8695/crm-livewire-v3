@@ -7,3 +7,6 @@ parameters:
         - database/
 
     level: 5
+
+    ignoreErrors:
+        - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\HasMany::[a-zA-Z_]+\(\)#'

@@ -11,12 +11,14 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $admin = User::factory()
+        User::factory()
             ->withPermission(Can::BE_AN_ADMIN)
             ->create([
                 'name'  => 'Admin do CRM',
                 'email' => 'admin@crm.com',
             ]);
+
+        $admin = User::where('email', 'admin@crm.com')->first();
 
         $this->normalUsers();
         $this->deletedUsers($admin);
@@ -29,7 +31,7 @@ class UserSeeder extends Seeder
         );
     }
 
-    public function deletedUsers(User $admin)
+    public function deletedUsers(User $admin): void
     {
         User::query()->insert(
             array_map(
