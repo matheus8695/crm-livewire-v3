@@ -23,6 +23,8 @@ class CustomerFactory extends Factory
 
             'address' => $this->faker->address,
             'city'    => $this->faker->city,
+
+            /** @phpstan-ignore-next-line */
             'state'   => $this->faker->state,
             'country' => $this->faker->country,
             'zip'     => $this->faker->postcode,
