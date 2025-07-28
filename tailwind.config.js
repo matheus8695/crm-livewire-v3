@@ -13,6 +13,5 @@ module.exports = {
   plugins: [
     forms,
     typography,
-    require("daisyui")
   ],
 };
