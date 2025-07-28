@@ -1,7 +1,8 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
+/* @plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography'; */
+@plugin "daisyui";
 
 @source '../../vendor/robsontenorio/mary/src/View/Components/**/*.php';
 
