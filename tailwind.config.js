@@ -1,19 +1,18 @@
-import forms from '@tailwindcss/forms'
-import typo from '@tailwindcss/typography'
-/** @type {import('tailwindcss').Config} */
-export default {
-    content: [
-		"./resources/**/*.blade.php",
-		 "./resources/**/*.js",
-		 "./vendor/robsontenorio/mary/src/View/Components/**/*.php"
-	],
+const forms = require('@tailwindcss/forms');
+const typography = require('@tailwindcss/typography');
+
+module.exports = {
+  content: [
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./vendor/robsontenorio/mary/src/View/Components/**/*.php"
+  ],
   theme: {
     extend: {},
   },
   plugins: [
-		forms,
-		typo,
-		require("daisyui")
-	],
-}
-
+    forms,
+    typography,
+    require("daisyui")
+  ],
+};
